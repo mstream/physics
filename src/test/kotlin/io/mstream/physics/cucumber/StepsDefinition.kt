@@ -48,5 +48,25 @@ class StepsDefinition {
                 .isCloseTo(y, acceptableResultsOffset)
     }
 
+    @Then("Product of vector '([a-z])' and (-?\\w+) should be \\[(-?\\w+),\\s?(-?\\w+)\\]")
+    fun inversionOfVector(
+            vectorName: Char,
+            scalarString: String,
+            xString: String,
+            yString: String) {
+        val scalar = scalarString.toDouble()
+        val x = xString.toDouble()
+        val y = yString.toDouble()
+        val vector = vectors[vectorName] ?: throw IllegalArgumentException(
+                "no such a vector: $vectorName")
+        val product = vector * scalar
+        Assertions
+                .assertThat(product.x)
+                .isCloseTo(x, acceptableResultsOffset)
+        Assertions
+                .assertThat(product.y)
+                .isCloseTo(y, acceptableResultsOffset)
+    }
+
 }
 
