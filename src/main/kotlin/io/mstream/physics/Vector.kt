@@ -7,4 +7,5 @@ data class Vector2d(val x: Double, val y: Double) {
     }
 
     fun length() = Math.sqrt(x * x + y * y)
+    operator fun unaryMinus() = Vector2d(-x, -y)
 }
