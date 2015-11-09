@@ -47,7 +47,7 @@ class StepsDefinition {
     }
 
     @Then("Product of vector '([a-z])' and (-?\\w+) should be $vectorRegex")
-    fun inversionOfVector(
+    fun productOfVectorAndScalar(
             vectorName: Char,
             scalarString: String,
             xString: String,
@@ -62,7 +62,7 @@ class StepsDefinition {
     }
 
     @Then("Sum of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
-    fun inversionOfVector(
+    fun sumOfVectors(
             firstVectorName: Char,
             secondVectorName: Char,
             xString: String,
@@ -75,6 +75,22 @@ class StepsDefinition {
         val y = yString.toDouble()
         val sum = firstVector + secondVector
         assertSimilar(sum, x, y)
+    }
+
+    @Then("Difference of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
+    fun differenceOfVectors(
+            firstVectorName: Char,
+            secondVectorName: Char,
+            xString: String,
+            yString: String) {
+        val firstVector = vectors[firstVectorName]
+                ?: throw notDeclaredException(firstVectorName)
+        val secondVector = vectors[secondVectorName]
+                ?: throw notDeclaredException(secondVectorName)
+        val x = xString.toDouble()
+        val y = yString.toDouble()
+        val difference = firstVector - secondVector
+        assertSimilar(difference, x, y)
     }
 
     private fun assertSimilar(sum: Vector2d, x: Double, y: Double) {
