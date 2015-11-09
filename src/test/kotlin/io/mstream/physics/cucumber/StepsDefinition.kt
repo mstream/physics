@@ -14,19 +14,19 @@ class StepsDefinition {
     val acceptableResultsOffset = Offset.offset(0.000001)
     var vectors: Map<Char, Vector2d> = emptyMap()
 
-    @Given("Vector '([a-z])' is a zero vector")
+    @Given("vector '([a-z])' is a zero vector")
     fun zeroVector(vectorName: Char) {
         vectors = vectors.plus(Pair(vectorName, Vector2d.ZERO))
     }
 
-    @Given("Vector '([a-z])' is $vectorRegex")
+    @Given("vector '([a-z])' is $vectorRegex")
     fun nonZeroVector(vectorName: Char, xString: String, yString: String) {
         val x = xString.toDouble()
         val y = yString.toDouble()
         vectors = vectors.plus(Pair(vectorName, Vector2d(x, y)))
     }
 
-    @Then("Length of vector '([a-z])' should be (-?\\w+)")
+    @Then("length of vector '([a-z])' should be (-?\\w+)")
     fun lengthOfVector(vectorName: Char, expectedLengthString: String) {
         val expectedLength = expectedLengthString.toDouble()
         val vector = vectors[vectorName]
@@ -36,7 +36,7 @@ class StepsDefinition {
                 .isCloseTo(expectedLength, acceptableResultsOffset)
     }
 
-    @Then("Inversion of vector '([a-z])' should be $vectorRegex")
+    @Then("inversion of vector '([a-z])' should be $vectorRegex")
     fun inversionOfVector(vectorName: Char, xString: String, yString: String) {
         val x = xString.toDouble()
         val y = yString.toDouble()
@@ -46,7 +46,7 @@ class StepsDefinition {
         assertSimilar(invertedVector, x, y)
     }
 
-    @Then("Product of vector '([a-z])' and (-?\\w+) should be $vectorRegex")
+    @Then("product of vector '([a-z])' and (-?\\w+) should be $vectorRegex")
     fun productOfVectorAndScalar(
             vectorName: Char,
             scalarString: String,
@@ -61,7 +61,7 @@ class StepsDefinition {
         assertSimilar(product, x, y)
     }
 
-    @Then("Sum of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
+    @Then("sum of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
     fun sumOfVectors(
             firstVectorName: Char,
             secondVectorName: Char,
@@ -77,7 +77,7 @@ class StepsDefinition {
         assertSimilar(sum, x, y)
     }
 
-    @Then("Difference of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
+    @Then("difference of vectors '([a-z])' and '([a-z])' should be $vectorRegex")
     fun differenceOfVectors(
             firstVectorName: Char,
             secondVectorName: Char,
