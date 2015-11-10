@@ -93,6 +93,16 @@ class StepsDefinition {
         assertSimilar(difference, x, y)
     }
 
+    @Then("normalized vector '([a-z])' should be $vectorRegex")
+    fun normalizedVector(vectorName: Char, xString: String, yString: String) {
+        val x = xString.toDouble()
+        val y = yString.toDouble()
+        val vector = vectors[vectorName]
+                ?: throw notDeclaredException(vectorName)
+        val normalizedVector = vector.normalize()
+        assertSimilar(normalizedVector, x, y)
+    }
+
     private fun assertSimilar(sum: Vector2d, x: Double, y: Double) {
         Assertions
                 .assertThat(sum.x)
